@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>여행 플래너</title>
+
+  <!-- 지도 라이브러리 Leaflet의 디자인 파일 (integrity = 파일이 바뀌지 않았는지 확인하는 지문) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 맨 위: 여행 이름 + 출발일 -->
+  <header class="app-header">
+    <input id="trip-title" class="trip-title" type="text" maxlength="40"
+      placeholder="여행 이름 (예: 부산 2박 3일)" />
+    <label class="start-date">
+      출발일 <input id="trip-start" type="date" />
+    </label>
+  </header>
+
+  <main>
+    <!-- 일차 탭 (전체 / 1일차 / 2일차 / + 일차 추가) : course.js가 채워 넣음 -->
+    <nav id="day-tabs" class="day-tabs" aria-label="일차 선택"></nav>
+
+    <!-- 지도 -->
+    <div id="map"></div>
+    <p id="map-hint" class="hint"></p>
+
+    <!-- 장소 입력 칸 : 지도를 누르면 나타남 -->
+    <form id="stop-form" class="card" hidden>
+      <h2 id="form-title">장소 추가</h2>
+      <label>장소 이름
+        <input id="stop-name" type="text" required maxlength="40" placeholder="예: 해운대 해수욕장" />
+      </label>
+      <label>시간
+        <input id="stop-time" type="time" />
+      </label>
+      <label>메모
+        <textarea id="stop-memo" rows="2" maxlength="200" placeholder="예: 입장료 3,000원 / 일몰 보기"></textarea>
+      </label>
+      <p class="hint">위치를 바꾸고 싶으면 지도를 다시 누르세요.</p>
+      <div class="row">
+        <button type="submit" class="btn primary">저장</button>
+        <button type="button" id="cancel-btn" class="btn">취소</button>
+      </div>
+    </form>
+
+    <!-- 코스 목록 -->
+    <section>
+      <div class="list-head">
+        <h2 id="list-title">코스</h2>
+        <button type="button" id="delete-day-btn" class="btn small danger">이 일차 삭제</button>
+      </div>
+      <ul id="stop-list" class="stop-list"></ul>
+      <p id="empty-text" class="hint" hidden>아직 장소가 없어요. 지도를 눌러 추가해 보세요.</p>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>데이터는 이 기기의 브라우저에만 저장돼요.</span>
+    <button type="button" id="reset-btn" class="btn small danger">전체 초기화</button>
+  </footer>
+
+  <!-- 순서 중요: Leaflet → storage.js → course.js -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+  <script src="storage.js"></script>
+  <script src="course.js"></script>
+</body>
+</html>

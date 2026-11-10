@@ -1,0 +1,201 @@
+/* ===== 기본 설정 ===== */
+[hidden] { display: none !important; } /* display:flex 같은 설정이 hidden을 덮어쓰는 버그 방지 */
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1f2328;
+  --muted: #6b7280;
+  --line: #e3e6ea;
+  --primary: #1c7ed6;
+  --danger: #e03131;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+input, textarea, button { font: inherit; }
+
+.app-header, main, .app-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+/* ===== 맨 위 (여행 이름, 출발일) ===== */
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+.trip-title {
+  flex: 1 1 220px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-bottom: 2px solid var(--line);
+  background: transparent;
+  padding: 6px 2px;
+  color: var(--text);
+}
+.trip-title:focus { outline: none; border-color: var(--primary); }
+.start-date { font-size: 0.9rem; color: var(--muted); }
+.start-date input {
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+}
+
+/* ===== 일차 탭 ===== */
+.day-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;      /* 일차가 많으면 옆으로 밀어서 보기 */
+  padding-bottom: 10px;
+}
+.tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.tab.active { background: var(--text); color: #fff; border-color: var(--text); }
+.tab.add { border-style: dashed; color: var(--muted); }
+.dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ===== 지도 ===== */
+#map {
+  height: 45vh;          /* 높이가 없으면 지도가 안 보임! */
+  min-height: 280px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+/* 지도 위 번호 핀 */
+.num-icon span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.hint { color: var(--muted); font-size: 0.85rem; margin: 6px 2px; }
+
+/* ===== 입력 칸 ===== */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  margin: 12px 0;
+}
+.card h2 { margin: 0 0 10px; font-size: 1rem; }
+.card label { display: block; margin-bottom: 10px; font-size: 0.9rem; color: var(--muted); }
+.card input, .card textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+.row { display: flex; gap: 8px; }
+
+/* ===== 버튼 ===== */
+.btn {
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  text-decoration: none;  /* 링크(a)를 버튼처럼 쓸 때 밑줄 제거 */
+  display: inline-block;
+}
+.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.btn.danger { color: var(--danger); }
+.btn.small { padding: 4px 10px; font-size: 0.85rem; }
+
+/* ===== 코스 목록 ===== */
+.list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+.list-head h2 { font-size: 1.05rem; margin: 0; }
+.stop-list { list-style: none; padding: 0; margin: 8px 0; }
+.stop {
+  display: flex;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.badge {
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.stop-body { flex: 1; min-width: 0; }
+.stop-time { color: var(--primary); font-weight: 600; font-size: 0.85rem; }
+.stop-name { font-weight: 600; }
+.stop-memo {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 2px;
+  white-space: pre-wrap;   /* 메모의 줄바꿈 그대로 보여주기 */
+  overflow-wrap: anywhere;
+}
+.stop-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.day-divider {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  margin: 14px 0 6px;
+}
+.day-empty { color: var(--muted); font-size: 0.85rem; margin: 0 0 8px 4px; }
+
+/* ===== 맨 아래 ===== */
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding-bottom: 32px;
+}
