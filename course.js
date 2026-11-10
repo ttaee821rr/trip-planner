@@ -11,7 +11,7 @@ const ALL_DAYS = -1; // '전체' 탭을 뜻하는 값
 // ---------- 데이터 ----------
 // 저장 모양: { title, startDate, days: [ { stops: [ {id, name, time, memo, lat, lng} ] } ] }
 function newTrip() {
-  return { title: '', startDate: '', days: [{ stops: [] }] };
+  return { title: '', startDate: '', days: [{ id: makeId(), stops: [] }] };
 }
 
 let trip = loadData('trip');
@@ -132,7 +132,10 @@ function makeDot(color) {
 function renderTabs() {
   dayTabs.innerHTML = '';
   dayTabs.append(makeTab('전체', ALL_DAYS));
-  trip.days.forEach((_, i) => dayTabs.append(makeTab(dayLabel(i), i, colorOf(i))));
+  trip.days.forEach((day) => {
+  if (!day.id) day.id = makeId();
+});
+saveTrip();
 
   const addBtn = document.createElement('button');
   addBtn.type = 'button';
@@ -342,7 +345,7 @@ function selectDay(dayIndex) {
 
 function addDay() {
   closeForm();
-  trip.days.push({ stops: [] });
+  trip.days.push({ id: makeId(), stops: [] });
   selectedDay = trip.days.length - 1;
   saveTrip();
   render();
@@ -438,18 +441,6 @@ startInput.addEventListener('change', () => {
   trip.startDate = startInput.value;
   saveTrip();
   render(); // 탭에 날짜 다시 표시
-});
-
-el('reset-btn').addEventListener('click', () => {
-  if (!confirm('여행 정보를 모두 지울까요? 되돌릴 수 없어요.')) return;
-  closeForm();
-  removeData('trip');
-  trip = newTrip();
-  selectedDay = 0;
-  titleInput.value = '';
-  startInput.value = '';
-  render();
-  map.setView(DEFAULT_CENTER, 12);
 });
 
 // ---------- 시작 ----------

@@ -114,7 +114,7 @@ input, textarea, button { font: inherit; }
 }
 .card h2 { margin: 0 0 10px; font-size: 1rem; }
 .card label { display: block; margin-bottom: 10px; font-size: 0.9rem; color: var(--muted); }
-.card input, .card textarea {
+.card input, .card textarea, .card select {
   display: block;
   width: 100%;
   margin-top: 4px;
@@ -199,3 +199,96 @@ input, textarea, button { font: inherit; }
   font-size: 0.8rem;
   padding-bottom: 32px;
 }
+/* =============================================================
+   [2단계 추가] 화면 아래 메뉴 + 예산 화면
+   ============================================================= */
+
+/* ----- 화면 아래 메뉴 ----- */
+body { padding-bottom: 76px; } /* 아래 메뉴에 내용이 가려지지 않게 */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;            /* 지도(Leaflet)보다 위에 보이게 */
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.97);
+  border-top: 1px solid var(--line);
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); /* 아이폰 하단 막대 피하기 */
+}
+.nav-btn {
+  flex: 1;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: none;
+  background: none;
+  border-radius: 10px;
+  padding: 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.nav-icon { font-size: 1.3rem; }
+.nav-btn.active { background: #eef0f3; color: var(--text); font-weight: 700; }
+
+/* ----- 예산 요약 ----- */
+.total-input { display: flex; align-items: center; gap: 8px; }
+.card .total-input input { flex: 1; width: auto; margin-top: 4px; font-size: 1.1rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 14px 0 10px;
+}
+.summary-grid .label { display: block; color: var(--muted); font-size: 0.8rem; }
+.summary-grid strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+#left-amount.over { color: var(--danger); }
+
+.progress { height: 10px; background: #eef0f3; border-radius: 999px; overflow: hidden; }
+#progress-bar { height: 100%; width: 0; background: #2f9e44; transition: width 0.3s; }
+#progress-bar.warn { background: #f08c00; }      /* 80% 이상: 주황 */
+#progress-bar.over { background: var(--danger); } /* 초과: 빨강 */
+
+/* ----- 지출 입력 ----- */
+.row > label { flex: 1; min-width: 0; }
+
+/* ----- 분류별 합계 ----- */
+.cat-row {
+  display: grid;
+  grid-template-columns: 7.5em 1fr auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.cat-bar { height: 8px; background: #eef0f3; border-radius: 999px; overflow: hidden; }
+.cat-bar span { display: block; height: 100%; background: var(--primary); }
+
+/* ----- 지출 내역 ----- */
+.group-head {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  margin: 14px 2px 6px;
+}
+.group-head span:last-child { color: var(--muted); }
+.expense {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.expense-icon { font-size: 1.3rem; }
+.expense-body { flex: 1; min-width: 0; }
+.expense-title { font-weight: 600; overflow-wrap: anywhere; }
+.expense-cat { color: var(--muted); font-size: 0.8rem; }
+.expense-amount { font-weight: 700; white-space: nowrap; }
