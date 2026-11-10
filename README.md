@@ -3,7 +3,7 @@
 지도에 일차별 여행 코스를 그리고, 시간과 메모로 일정을 계획하는 웹앱입니다.
 설치 없이 브라우저에서 바로 쓸 수 있고, 데이터는 내 기기에만 저장됩니다.
 
-🔗 **바로 사용하기:** https://YOUR_GITHUB_ID.github.io/trip-planner/
+🔗 **바로 사용하기:** https://ttaee821rr.github.io/trip-planner/
 
 <!-- 스크린샷 넣는 법: 앱 화면을 screenshot.png로 저장해 저장소에 올리고, 이 줄을 ![앱 화면](screenshot.png) 로 바꾸세요. -->
 
