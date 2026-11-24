@@ -329,3 +329,19 @@ body { padding-bottom: 76px; } /* 아래 메뉴에 내용이 가려지지 않게
 }
 .check-item span { overflow-wrap: anywhere; }
 .check-item.done span { color: var(--muted); text-decoration: line-through; } /* 끝낸 항목은 줄 긋기 */
+
+/* =============================================================
+   [4단계 추가] 주차 화면
+   ============================================================= */
+#park-map {
+  height: 35vh;          /* 높이가 없으면 지도가 안 보임! */
+  min-height: 220px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+.park-hero { text-align: center; padding: 24px 16px; }
+.park-hero h2 { font-size: 1.2rem; }
+.btn.big { width: 100%; padding: 14px; font-size: 1.05rem; font-weight: 700; margin-top: 8px; }
+.park-actions { flex-wrap: wrap; margin-top: 12px; }
+.hint-inline { color: var(--muted); font-size: 0.8rem; font-weight: 400; }

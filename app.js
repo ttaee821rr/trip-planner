@@ -3,7 +3,7 @@
 // 맨 마지막에 불러와야 해요 (course.js, budget.js의 함수를 쓰기 때문)
 // =============================================================
 
-const PAGES = ['course', 'budget', 'checklist']; // 3단계부터 여기에 하나씩 추가돼요
+const PAGES = ['course', 'budget', 'checklist, 'parking']; // 3단계부터 여기에 하나씩 추가돼요
 
 function showPage(name) {
   if (!PAGES.includes(name)) name = 'course';
@@ -19,6 +19,7 @@ function showPage(name) {
 
   if (name === 'course') map.invalidateSize(); // 숨겨졌다가 다시 나온 지도는 크기를 다시 계산해야 제대로 보여요
   if (name === 'budget') renderBudget();       // 코스 화면에서 바뀐 일차(추가·삭제·날짜)를 반영
+  if (name === 'parking') renderParking();     // 주차 지도는 화면이 보일 때 그려야 크기가 맞아요
 
   saveData('page', name); // 마지막으로 본 화면 기억하기
   window.scrollTo(0, 0);
@@ -31,10 +32,11 @@ document.querySelectorAll('.nav-btn').forEach((btn) => {
 
 // 전체 초기화: 코스 + 예산을 모두 지우고 새로고침
 document.getElementById('reset-btn').addEventListener('click', () => {
-  if (!confirm('여행 코스, 예산, 체크리스트를 모두 지울까요? 되돌릴 수 없어요.')) return;
+  if (!confirm('여행 코스, 예산, 체크리스트, 주차 기록을 모두 지울까요? 되돌릴 수 없어요.')) return;
   removeData('trip');
   removeData('budget');
   removeData('checklist');
+  removeData('parking');
   removeData('page');
   location.reload(); // 새로고침하면 빈 상태로 다시 시작
 });

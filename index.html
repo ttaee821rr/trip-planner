@@ -134,6 +134,52 @@
       <ul id="check-list" class="stop-list"></ul>
       <p id="check-empty" class="hint">아직 항목이 없어요. 직접 추가하거나 기본 목록을 불러오세요.</p>
     </section>
+
+    <!-- ==================== 화면 4: 주차 (parking.js) ==================== -->
+    <section id="page-parking" class="page" hidden>
+      <!-- 주차 전: 위치 저장 버튼 -->
+      <div id="park-empty" class="card park-hero">
+        <h2>🅿️ 주차했나요?</h2>
+        <p class="hint">차에서 내린 자리에서 누르면 지금 위치를 저장해요.</p>
+        <button type="button" id="park-save-btn" class="btn primary big">📍 지금 위치를 주차 위치로 저장</button>
+      </div>
+
+      <!-- 주차 후: 지도 + 정보 -->
+      <div id="park-info" hidden>
+        <div id="park-map"></div>
+        <div class="card">
+          <div class="summary-grid">
+            <div><span class="label">주차 시작</span><strong id="park-start">-</strong></div>
+            <div><span class="label">지난 시간</span><strong id="park-elapsed">-</strong></div>
+            <div><span class="label">예상 요금</span><strong id="park-fee">-</strong></div>
+          </div>
+          <p id="park-accuracy" class="hint"></p>
+          <label>층·구역 메모
+            <input id="park-memo" type="text" maxlength="60" placeholder="예: B2 C-15, 엘리베이터 옆" />
+          </label>
+          <div class="row park-actions">
+            <button type="button" id="park-update-btn" class="btn">📍 위치 다시 잡기</button>
+            <button type="button" id="park-clear-btn" class="btn danger">출차 완료</button>
+          </div>
+        </div>
+      </div>
+      <p id="park-status" class="hint" aria-live="polite"></p>
+
+      <!-- 요금 설정 (입력하면 바로 저장) -->
+      <form id="rate-form" class="card">
+        <h2>주차 요금 설정 <span class="hint-inline">(입구 요금표 보고 입력)</span></h2>
+        <div class="row">
+          <label>기본 시간(분) <input id="rate-base-min" type="number" inputmode="numeric" min="0" placeholder="30" /></label>
+          <label>기본 요금(원) <input id="rate-base-fee" type="number" inputmode="numeric" min="0" placeholder="1000" /></label>
+        </div>
+        <div class="row">
+          <label>추가 단위(분) <input id="rate-unit-min" type="number" inputmode="numeric" min="1" placeholder="10" /></label>
+          <label>추가 요금(원) <input id="rate-unit-fee" type="number" inputmode="numeric" min="0" placeholder="500" /></label>
+        </div>
+        <label>하루 최대 요금(원, 없으면 비워 두기) <input id="rate-day-max" type="number" inputmode="numeric" min="0" placeholder="20000" /></label>
+        <p id="rate-preview" class="hint"></p>
+      </form>
+    </section>
   </main>
 
   <footer class="app-footer">
@@ -144,6 +190,7 @@
   <button type="button" class="nav-btn" data-page="course"><span class="nav-icon">🗺️</span>코스</button>
   <button type="button" class="nav-btn" data-page="budget"><span class="nav-icon">💰</span>예산</button>
       <button type="button" class="nav-btn" data-page="checklist"><span class="nav-icon">✅</span>체크리스트</button>
+          <button type="button" class="nav-btn" data-page="parking"><span class="nav-icon">🅿️</span>주차</button>
 </nav>
 
   <!-- 순서 중요: Leaflet → storage.js → course.js -->
@@ -153,7 +200,8 @@
   <script src="storage.js"></script>
   <script src="course.js"></script>
   <script src="budget.js"></script>
-    <script src="checklist.js"></script>
+  <script src="checklist.js"></script>
+  <script src="parking.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
