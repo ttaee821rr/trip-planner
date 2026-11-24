@@ -3,7 +3,7 @@
 // 맨 마지막에 불러와야 해요 (course.js, budget.js의 함수를 쓰기 때문)
 // =============================================================
 
-const PAGES = ['course', 'budget', 'checklist, 'parking']; // 3단계부터 여기에 하나씩 추가돼요
+const PAGES = ['course', 'budget', 'checklist', 'parking']; // 3단계부터 여기에 하나씩 추가돼요
 
 function showPage(name) {
   if (!PAGES.includes(name)) name = 'course';
