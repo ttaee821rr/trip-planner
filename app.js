@@ -3,7 +3,7 @@
 // 맨 마지막에 불러와야 해요 (course.js, budget.js의 함수를 쓰기 때문)
 // =============================================================
 
-const PAGES = ['course', 'budget']; // 3단계부터 여기에 하나씩 추가돼요
+const PAGES = ['course', 'budget', 'checklist']; // 3단계부터 여기에 하나씩 추가돼요
 
 function showPage(name) {
   if (!PAGES.includes(name)) name = 'course';
@@ -31,9 +31,10 @@ document.querySelectorAll('.nav-btn').forEach((btn) => {
 
 // 전체 초기화: 코스 + 예산을 모두 지우고 새로고침
 document.getElementById('reset-btn').addEventListener('click', () => {
-  if (!confirm('여행 코스와 예산 기록을 모두 지울까요? 되돌릴 수 없어요.')) return;
+  if (!confirm('여행 코스, 예산, 체크리스트를 모두 지울까요? 되돌릴 수 없어요.')) return;
   removeData('trip');
   removeData('budget');
+  removeData('checklist');
   removeData('page');
   location.reload(); // 새로고침하면 빈 상태로 다시 시작
 });

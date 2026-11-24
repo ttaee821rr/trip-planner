@@ -19,6 +19,14 @@ if (!trip || !Array.isArray(trip.days) || trip.days.length === 0) {
   trip = newTrip(); // 처음 쓰는 사람이면 빈 여행 하나 만들기
 }
 
+
+// [2단계 추가] 일차마다 고유 id 붙이기 — 예산 기능이 "몇 일차에 쓴 돈인지" 구분할 때 사용
+// (1단계 때 저장한 데이터에는 id가 없어서 여기서 붙여 주고 바로 저장)
+trip.days.forEach((day) => {
+  if (!day.id) day.id = makeId();
+});
+saveTrip();
+
 let selectedDay = 0;      // 지금 보고 있는 일차 (0 = 1일차, ALL_DAYS = 전체)
 let editingId = null;     // 수정 중인 장소의 id (새로 추가하는 중이면 null)
 let pendingLatLng = null; // 입력 칸에서 저장할 위치

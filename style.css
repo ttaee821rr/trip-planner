@@ -292,3 +292,40 @@ body { padding-bottom: 76px; } /* 아래 메뉴에 내용이 가려지지 않게
 .expense-title { font-weight: 600; overflow-wrap: anywhere; }
 .expense-cat { color: var(--muted); font-size: 0.8rem; }
 .expense-amount { font-weight: 700; white-space: nowrap; }
+
+/* =============================================================
+   [3단계 추가] 체크리스트 화면
+   ============================================================= */
+.progress-text { font-weight: 700; margin: 0 0 8px; }
+#check-progress-bar { height: 100%; width: 0; background: var(--primary); transition: width 0.3s; }
+#check-progress-bar.done { background: #2f9e44; } /* 전부 끝나면 초록 */
+
+.row > label.group-label { flex: 0 0 9em; } /* 분류 선택칸은 좁게 */
+.template-row { flex-wrap: wrap; margin-bottom: 4px; }
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+}
+.check-item label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.check-item input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary); /* 체크박스 색 */
+}
+.check-item span { overflow-wrap: anywhere; }
+.check-item.done span { color: var(--muted); text-decoration: line-through; } /* 끝낸 항목은 줄 긋기 */
